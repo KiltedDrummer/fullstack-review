@@ -1,7 +1,8 @@
 const request = require('request');
 const config = require('../config.js');
 
-let getReposByUsername = (username) => {
+let getReposByUsername = (username, callback) => {
+  console.log('getReposByUsername')
   // TODO - Use the request module to request repos for a specific
   // user from the github API
 
@@ -20,7 +21,7 @@ let getReposByUsername = (username) => {
       console.error(error);
     } else {
       console.log('Got Data back from GitHub!');
-      
+      callback(body);
     };
   })
 

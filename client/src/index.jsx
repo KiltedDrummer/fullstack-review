@@ -18,15 +18,29 @@ class App extends React.Component {
     // TODO
     $.ajax({
       type: "POST",
-      url: 'localhost:1128/repos',
+      url: 'http://localhost:1128/repos',
       data: JSON.stringify({query: term}),
       dataType: 'application/json',
-      success: (response) => {
+      success: () => this.fetch().bind(this)
+    });
+  }
+
+  fetch() {
+    console.log('fetching New Data');
+
+    $.ajax({
+      type:"GET",
+      url: 'http://localhost:1128/repos',
+      success: (respose) => {
         this.setState({
-          repos: response
+          repos: respose
         });
       }
     });
+  }
+
+  componentDidMount() {
+    this.fetch();
   }
 
   render () {
